@@ -1,0 +1,158 @@
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.tabButton {
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  color: #666;
+  position: relative;
+  margin-right: 10px;
+}
+
+.tabButton.active {
+  color: #2c3e50;
+}
+
+.tabButton.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #3498db;
+}
+
+.title {
+  font-size: 40px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 20px;
+}
+
+.inputField {
+  width: 98%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.rememberMe {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.rememberMe label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 20px;
+}
+
+.rememberMe input {
+  margin-right: 10px;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #2980b9;
+}
+
+.lostPassword {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.lostPassword a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.notice {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 20px;
+}
+
+.privacyPolicy {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .tabButton {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .tabButton {
+    padding: 8px 12px;
+  font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,173 @@
+.footer {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 40px 0 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.brandSection {
+  max-width: 400px;
+}
+
+.brandTitle {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.brandText {
+  line-height: 1.6;
+  color: #bdc3c7;
+  margin-bottom: 20px;
+}
+
+.brandLogo {
+  max-width: 350px;
+  height: auto;
+}
+
+.linksSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.linksColumn {
+  margin-bottom: 20px;
+}
+
+.linksTitle {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.linksTitle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #3498db;
+}
+
+.linksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linksList li {
+  margin-bottom: 12px;
+  color: #bdc3c7;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.linksList a {
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.linksList a:hover {
+  color: #3498db;
+}
+
+.contactIcon {
+  margin-right: 10px;
+  color: #3498db;
+  min-width: 20px;
+}
+
+.paymentItem {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #34495e;
+}
+
+.paymentLogo {
+  height: 30px;
+  width: auto;
+}
+
+
+ .copyrightSection {
+  width: 97.5%;
+  background-color: black;
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  padding: 20px;
+  border-top: 1px solid #34495e;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .footerContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .brandSection {
+    max-width: 100%;
+  }
+  
+  .linksSection {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .linksSection {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .brandTitle {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer {
+    padding: 30px 0 15px;
+  }
+  
+  .brandTitle {
+    font-size: 1.5rem;
+  }
+  
+  .linksTitle {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  .contactIcon {
+    margin-right: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .paymentLogo {
+    height: 25px;
+  }
+}

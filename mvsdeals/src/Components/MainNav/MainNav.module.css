@@ -1,0 +1,167 @@
+/* .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logoContainer {
+    flex: 1;
+  }
+  
+  .logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+  }
+  
+  .navLinks {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    flex: 2;
+    justify-content: center;
+  }
+  
+  .navLinks a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s;
+  }
+  
+  .navLinks a:hover {
+    color: #ff9900;
+  }
+  
+  .active {
+    color: #ff9900 !important;
+    font-weight: 600 !important;
+  }
+  
+  .cartIcon {
+    flex: 1;
+    text-align: right;
+    font-size: 20px;
+  }
+   */
+
+   .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logoContainer {
+    flex-shrink: 0;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .navLinks {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .navLinks li {
+    position: relative;
+  }
+  
+  .navLinks a,
+  .dropdownToggle {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0.5rem;
+    display: inline-block;
+    font-weight: 500;
+  }
+  
+  .active {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  /* Dropdown Styles */
+  .dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0.5rem 0;
+    z-index: 1000;
+    min-width: 180px;
+  }
+  
+  .dropdownMenu li {
+    padding: 0;
+  }
+  
+  .dropdownMenu li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  
+  .dropdownMenu li a:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .cartIcon {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  /* Responsive adjustments (optional, based on previous styles) */
+  @media (max-width: 768px) {
+    .navLinks {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .dropdownMenu {
+      position: static;
+      box-shadow: none;
+      border: none;
+    }
+  }
+  
+
+  .dropdownToggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 6px;
+  }
+  
+  .dropdownIcon {
+    transition: transform 0.3s ease;
+    font-size: 0.75rem;
+    color: #333;
+  }
+  
+  .rotate {
+    transform: rotate(180deg);
+  }
+  
