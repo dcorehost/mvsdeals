@@ -49,7 +49,10 @@ const MainNav = () => {
         <li><Link to="/contact-us">Contact Us</Link></li>
         <li><Link to="/account">My Account</Link></li>
       </ul>
-      <div className={styles.cartIcon}>🛒</div>
+      <Link to="/cart" className={styles.cartIcon}>
+  🛒
+</Link>
+
     </nav>
   );
 };
