@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import styles from './LoginRegister.module.css';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify'; // Correct import of ToastContainer
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import { useNavigate } from 'react-router-dom';
 
-// Axios instance for API calls
-const apiUrl = 'https://mvsdeals.online'; // Base URL of the API
+const apiUrl = 'https://mvsdeals.online'; 
 
 const LoginRegister = () => {
   const [message, setMessage] = useState('');
@@ -17,7 +16,6 @@ const LoginRegister = () => {
 const navigate = useNavigate();
 
 
-  // Handle Login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -27,23 +25,21 @@ const navigate = useNavigate();
       });
 
       if (response.data.success) {
-        // Store token and other data in localStorage
         localStorage.setItem('authToken', response.data.token);
         localStorage.setItem('userEmail', response.data.email);
-        toast.success(response.data.message); // Show success message
+        toast.success(response.data.message); 
 
         setTimeout(() => {
     navigate('/');
   }, 1500);
       } else {
-        toast.error(response.data.error); // Show error message
+        toast.error(response.data.error); 
       }
     } catch (error) {
       toast.error('An error occurred during login. Please try again.');
     }
   };
 
-  // Handle Register
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
