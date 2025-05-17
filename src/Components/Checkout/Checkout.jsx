@@ -1,124 +1,286 @@
-
-// import React from "react";
-// import styles from "./Checkout.module.css";
-// import { FaCreditCard } from "react-icons/fa";
-// import { MdOutlineShoppingCart } from "react-icons/md";
-
-// const Checkout = () => {
-//   return (
-//     <div className={styles.checkoutContainer}>
-//       <h2 className={styles.pageTitle}><MdOutlineShoppingCart /> Checkout</h2>
-//       <div className={styles.checkoutContent}>
-//         <div className={styles.leftColumn}>
-//           <form className={styles.billingForm}>
-//             <h3 className={styles.sectionTitle}>Billing Details</h3>
-//             <div className={styles.fieldGroup}>
-//               <div className={styles.field}><label>First name *</label><input type="text" required /></div>
-//               <div className={styles.field}><label>Last name *</label><input type="text" required /></div>
-//             </div>
-//             <div className={styles.field}><label>Company name (optional)</label><input type="text" /></div>
-//             <div className={styles.field}><label>Country / Region *</label><select><option>United States (US)</option></select></div>
-//             <div className={styles.field}><label>Street address *</label><input type="text" required /></div>
-//             <div className={styles.field}><input type="text" placeholder="Apartment, suite, unit, etc. (optional)" /></div>
-//             <div className={styles.field}><label>Town / City *</label><input type="text" required /></div>
-//             <div className={styles.field}><label>State *</label><select><option>California</option></select></div>
-//             <div className={styles.field}><label>ZIP Code *</label><input type="text" required /></div>
-//             <div className={styles.field}><label>Phone *</label><input type="tel" required /></div>
-//             <div className={styles.field}><label>Email address *</label><input type="email" required /></div>
-//             <div className={styles.fieldCheckbox}><input type="checkbox" /> <span>Create an account?</span></div>
-//             <div className={styles.field}><label>Order notes (optional)</label><textarea placeholder="Notes about your order, e.g. special notes for delivery." /></div>
-//           </form>
-//         </div>
-
-//         <div className={styles.rightColumn}>
-//           <div className={styles.orderSummary}>
-//             <h3 className={styles.sectionTitle}>Your Order</h3>
-//             <div className={styles.orderItem}><span>McAfee Antivirus Plus 1 Year 1 User × 2</span><span>$118.00</span></div>
-//             <div className={styles.orderItem}><span>Norton 360 Deluxe (5 Devices) × 1</span><span>$29.99</span></div>
-//             <div className={styles.orderTotal}><span>Total</span><span>$147.99</span></div>
-
-//             <div className={styles.paymentSection}>
-//               <h4><FaCreditCard /> Credit Card</h4>
-//               <p className={styles.testModeNote}>TEST MODE ENABLED<br />Use card number 4111111111111111 with any CVC and valid date.</p>
-//               <div className={styles.field}><label>Card number</label><input type="text" placeholder="**** **** **** ****" /></div>
-//               <div className={styles.fieldGroup}>
-//                 <div className={styles.field}><label>Expiry (MM/YY)</label><input type="text" placeholder="MM / YY" /></div>
-//                 <div className={styles.field}><label>Card code</label><input type="text" placeholder="CVC" /></div>
-//               </div>
-//               <p className={styles.privacyNote}>Your personal data will be used to process your order and enhance your experience.</p>
-//               <button className={styles.placeOrderBtn}>Place Order</button>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Checkout;
-
-
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./Checkout.module.css";
 import { FaCreditCard } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import axios from "axios";
+import Auth from "../Services/Auth";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { cartItems = [], total = "0.00" } = location.state || {};
+
+  const [billing, setBilling] = useState({
+    first_name: "",
+    last_name: "",
+    company: "",
+    country: "India",
+    address: "",
+    apartment: "",
+    city: "",
+    state: "",
+    zip: "",
+    phone: "",
+    email: "",
+    notes: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBilling((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePlaceOrder = async () => {
+    const user_id = Auth.getUserId();
+
+    if (!user_id) {
+      alert("User not logged in");
+      return;
+    }
+
+    const payload = {
+      user_id,
+      billing,
+      cartItems: cartItems.map((item) => ({
+        product_id: item.product_id,
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+        subtotal: item.subtotal,
+      })),
+      total,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://mvsdeals.online/checkout.php",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data.status === "success") {
+        alert("Order placed successfully!");
+        setBilling({
+          first_name: "",
+          last_name: "",
+          company: "",
+          country: "India",
+          address: "",
+          apartment: "",
+          city: "",
+          state: "",
+          zip: "",
+          phone: "",
+          email: "",
+          notes: "",
+        });
+
+        // Navigate to home
+        navigate("/");
+        // Optional: redirect or reset form
+      } else {
+        alert("Order failed: " + response.data.message);
+      }
+    } catch (error) {
+      alert("Something went wrong during checkout.");
+      console.error(error);
+    }
+  };
 
   return (
     <div className={styles.checkoutContainer}>
-      <h2 className={styles.pageTitle}><MdOutlineShoppingCart /> Checkout</h2>
+      <h2 className={styles.pageTitle}>
+        <MdOutlineShoppingCart /> Checkout
+      </h2>
       <div className={styles.checkoutContent}>
         <div className={styles.leftColumn}>
-          <form className={styles.billingForm}>
+          <form
+            className={styles.billingForm}
+            onSubmit={(e) => e.preventDefault()}
+          >
             <h3 className={styles.sectionTitle}>Billing Details</h3>
             <div className={styles.fieldGroup}>
-              <div className={styles.field}><label>First name *</label><input type="text" required /></div>
-              <div className={styles.field}><label>Last name *</label><input type="text" required /></div>
+              <div className={styles.field}>
+                <label>First name *</label>
+                <input
+                  type="text"
+                  name="first_name"
+                  value={billing.first_name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Last name *</label>
+                <input
+                  type="text"
+                  name="last_name"
+                  value={billing.last_name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
-            <div className={styles.field}><label>Company name (optional)</label><input type="text" /></div>
-            <div className={styles.field}><label>Country / Region *</label><select><option>United States (US)</option></select></div>
-            <div className={styles.field}><label>Street address *</label><input type="text" required /></div>
-            <div className={styles.field}><input type="text" placeholder="Apartment, suite, unit, etc. (optional)" /></div>
-            <div className={styles.field}><label>Town / City *</label><input type="text" required /></div>
-            <div className={styles.field}><label>State *</label><select><option>California</option></select></div>
-            <div className={styles.field}><label>ZIP Code *</label><input type="text" required /></div>
-            <div className={styles.field}><label>Phone *</label><input type="tel" required /></div>
-            <div className={styles.field}><label>Email address *</label><input type="email" required /></div>
-            <div className={styles.fieldCheckbox}><input type="checkbox" /> <span>Create an account?</span></div>
-            <div className={styles.field}><label>Order notes (optional)</label><textarea placeholder="Notes about your order, e.g. special notes for delivery." /></div>
+            <div className={styles.field}>
+              <label>Company name (optional)</label>
+              <input
+                type="text"
+                name="company"
+                value={billing.company}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.field}>
+              <label>Country / Region *</label>
+              <select
+                name="country"
+                value={billing.country}
+                onChange={handleChange}
+              >
+                <option>India</option>
+              </select>
+            </div>
+            <div className={styles.field}>
+              <label>Street address *</label>
+              <input
+                type="text"
+                name="address"
+                value={billing.address}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.field}>
+              <input
+                type="text"
+                name="apartment"
+                placeholder="Apartment, suite, etc."
+                value={billing.apartment}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.field}>
+              <label>Town / City *</label>
+              <input
+                type="text"
+                name="city"
+                value={billing.city}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.field}>
+              <label>State *</label>
+              <input
+                type="text"
+                name="state"
+                value={billing.state}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.field}>
+              <label>ZIP Code *</label>
+              <input
+                type="text"
+                name="zip"
+                value={billing.zip}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.field}>
+              <label>Phone *</label>
+              <input
+                type="tel"
+                name="phone"
+                value={billing.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.field}>
+              <label>Email address *</label>
+              <input
+                type="email"
+                name="email"
+                value={billing.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.fieldCheckbox}>
+              <input type="checkbox" />
+              <span>Create an account?</span>
+            </div>
+            <div className={styles.field}>
+              <label>Order notes (optional)</label>
+              <textarea
+                name="notes"
+                placeholder="Notes about your order"
+                value={billing.notes}
+                onChange={handleChange}
+              />
+            </div>
           </form>
         </div>
 
         <div className={styles.rightColumn}>
           <div className={styles.orderSummary}>
             <h3 className={styles.sectionTitle}>Your Order</h3>
-            
             {cartItems.map((item) => (
-              <div key={item.id} className={styles.orderItem}>
-                <span>{item.name} × {item.quantity}</span>
+              <div key={item.product_id} className={styles.orderItem}>
+                <span>
+                  {item.name} × {item.quantity}
+                </span>
                 <span>${item.subtotal}</span>
               </div>
             ))}
-            
             <div className={styles.orderTotal}>
               <span>Total</span>
               <span>${total}</span>
             </div>
 
             <div className={styles.paymentSection}>
-              <h4><FaCreditCard /> Credit Card</h4>
-              <p className={styles.testModeNote}>TEST MODE ENABLED<br />Use card number 4111111111111111 with any CVC and valid date.</p>
-              <div className={styles.field}><label>Card number</label><input type="text" placeholder="**** **** **** ****" /></div>
-              <div className={styles.fieldGroup}>
-                <div className={styles.field}><label>Expiry (MM/YY)</label><input type="text" placeholder="MM / YY" /></div>
-                <div className={styles.field}><label>Card code</label><input type="text" placeholder="CVC" /></div>
+              <h4>
+                <FaCreditCard /> Credit Card
+              </h4>
+              <p className={styles.testModeNote}>
+                TEST MODE ENABLED
+                <br />
+                Use card number <strong>4111111111111111</strong> with any CVC
+                and valid date.
+              </p>
+              <div className={styles.field}>
+                <label>Card number</label>
+                <input type="text" placeholder="**** **** **** ****" />
               </div>
-              <p className={styles.privacyNote}>Your personal data will be used to process your order and enhance your experience.</p>
-              <button className={styles.placeOrderBtn}>Place Order</button>
+              <div className={styles.fieldGroup}>
+                <div className={styles.field}>
+                  <label>Expiry (MM/YY)</label>
+                  <input type="text" placeholder="MM / YY" />
+                </div>
+                <div className={styles.field}>
+                  <label>Card code</label>
+                  <input type="text" placeholder="CVC" />
+                </div>
+              </div>
+              <p className={styles.privacyNote}>
+                Your personal data will be used to process your order and
+                enhance your experience.
+              </p>
+              <button
+                className={styles.placeOrderBtn}
+                onClick={handlePlaceOrder}
+              >
+                Place Order
+              </button>
             </div>
           </div>
         </div>
