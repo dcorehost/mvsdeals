@@ -1,14 +1,15 @@
-
-
-import React from "react";
+import React from "react"; 
 import styles from "./HomeShop.module.css";
 import { assets } from '../../assets/assets';
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Auth from "../Services/Auth"; // Import the Auth service
 
-const HomeShop = ({ addToCart }) => {
+const HomeShop = () => {
   const navigate = useNavigate();
 
+  // Map the products to add sale information
   const productsWithSale = assets.products.map(product => {
     const onSale = [1, 7, 8, 9, 10, 11, 13, 14, 15, 16].includes(product.id); 
     return {
@@ -18,10 +19,50 @@ const HomeShop = ({ addToCart }) => {
     };
   });
 
-  const handleAddToCart = (product) => {
-    addToCart(product);
-    // remove alert and directly navigate
-    navigate("/cart");
+  // Function to handle adding a product to the cart
+  const handleAddToCart = async (product) => {
+    try {
+      const token = Auth.getToken(); // Get the token from localStorage using the Auth service
+
+      if (!token) {
+        alert("No authentication token found. Please log in.");
+        return;
+      }
+
+      // Get the dynamic user_id from the Auth service
+      const user_id = Auth.getUserId();  // Fetch user_id from localStorage
+
+      if (!user_id) {
+        alert("User is not logged in. Please log in.");
+        return;
+      }
+
+      // Post the data to the backend
+      const response = await axios.post(
+        "https://mvsdeals.online/addToCart.php", 
+        {
+          user_id,  // Send user_id (match DB field)
+          product_id: product.id,
+          quantity: 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Send the Bearer token
+            'Content-Type': 'application/json', // Ensure the request is sent as JSON
+          }
+        }
+      );
+
+      if (response.data.status === "success") {
+        navigate("/cart"); // Redirect to the cart page after successful add
+      } else {
+        console.error("Add to cart failed:", response.data.message);
+        alert(response.data.message); // Show error message
+      }
+    } catch (error) {
+      console.error("API error:", error);
+      alert("Something went wrong while adding to cart.");
+    }
   };
 
   return (
@@ -40,7 +81,7 @@ const HomeShop = ({ addToCart }) => {
               />
               <div 
                 className={styles.addToCartIcon}
-                onClick={() => handleAddToCart(product)}
+                onClick={() => handleAddToCart(product)} // Call the function to add the product to cart
               >
                 <FaCartPlus />
               </div>
@@ -55,7 +96,7 @@ const HomeShop = ({ addToCart }) => {
             </div>
             <button 
               className={styles.addToCartButton}
-              onClick={() => handleAddToCart(product)}
+              onClick={() => handleAddToCart(product)} // Call the function to add the product to cart
             >
               Add to Cart
             </button>

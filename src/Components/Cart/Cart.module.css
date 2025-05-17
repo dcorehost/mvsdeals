@@ -6,6 +6,15 @@
   color: #333;
 }
 
+.cartTable tr.highlightedRow {
+  background-color: #f0f8ff; /* Light blue background for highlighted row */
+}
+
+.quantityInput {
+  width: 50px;  /* Adjust the input field size */
+  text-align: center;
+}
+
 .cartTitle {
   font-size: 2rem;
   margin-bottom: 20px;

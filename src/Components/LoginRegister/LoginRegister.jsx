@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
 import { useNavigate } from 'react-router-dom';
+import Auth from '../Services/Auth';  // Import the Auth service
 
 const apiUrl = 'https://mvsdeals.online'; 
 
@@ -13,9 +14,9 @@ const LoginRegister = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-
+  // Handle Login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -25,21 +26,28 @@ const navigate = useNavigate();
       });
 
       if (response.data.success) {
-        localStorage.setItem('authToken', response.data.token);
-        localStorage.setItem('userEmail', response.data.email);
+        // Save token and user data to Auth service or localStorage
+        Auth.login({
+          token: response.data.token,
+          username: response.data.email,  // You can replace it with the username if needed
+          emailId: response.data.email,
+          user_id: response.data.user_id, // Add user_id here
+        });
+
         toast.success(response.data.message); 
 
         setTimeout(() => {
-    navigate('/');
-  }, 1500);
+          navigate('/');  // Redirect to home page after successful login
+        }, 1500);
       } else {
-        toast.error(response.data.error); 
+        toast.error(response.data.error);  // Show error message from backend
       }
     } catch (error) {
       toast.error('An error occurred during login. Please try again.');
     }
   };
 
+  // Handle Registration
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
@@ -48,21 +56,19 @@ const navigate = useNavigate();
       });
 
       if (response.data.success) {
-        
         toast.success('Registration successful! Check your email for further instructions.');
         console.log('Temporary Password:', response.data.temporary_password);
-          setActiveTab('login'); // ⬅ Switch to login tab
-
+        setActiveTab('login'); // Switch to login tab after successful registration
       } else {
-        toast.error(response.data.error); // Show error message
+        toast.error(response.data.error);  // Show error message from backend
       }
     } catch (error) {
-if (error.response && error.response.data && error.response.data.error) {
-      toast.error(error.response.data.error); // Error sent from backend
-    } else {
-      toast.error('An unexpected error occurred.'); // General error
-        }    
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error);  // Error sent from backend
+      } else {
+        toast.error('An unexpected error occurred.');  // General error
       }
+    }
   };
 
   return (
