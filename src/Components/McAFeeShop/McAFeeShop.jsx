@@ -1,12 +1,12 @@
 import React from "react"; 
-import styles from "./HomeShop.module.css";
+import styles from "./McAFeeShop.module.css";
 import { assets } from '../../assets/assets';
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Auth from "../Services/Auth"; // Import the Auth service
+import Auth from "../Services/Auth"; 
 
-const HomeShop = () => {
+const McAFeeShop = () => {
   const navigate = useNavigate();
 
   // Map the products to add sale information
@@ -22,7 +22,7 @@ const HomeShop = () => {
   // Function to handle adding a product to the cart
   const handleAddToCart = async (product) => {
     try {
-      const token = Auth.getToken(); // Get the token from localStorage using the Auth service
+      const token = Auth.getToken(); 
 
       if (!token) {
         alert("No authentication token found. Please log in.");
@@ -107,4 +107,4 @@ const HomeShop = () => {
   );
 };
 
-export default HomeShop;
+export default McAFeeShop;

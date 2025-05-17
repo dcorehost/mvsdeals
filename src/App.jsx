@@ -11,7 +11,6 @@ import ShippingPolicy from "./Pages/ShippingPolicy/ShippingPolicy";
 import RefundPolicy from "./Pages/RefundPolicy/RefundPolicy";
 import TermsCondition from "./Pages/TermsCondition/TermsCondition";
 import McAfee from "./Pages/McAfee/McAfee";
-import Checkout from "./Components/Checkout/Checkout";
 import AddCart from "./Pages/AddCart/AddCart";
 import CheckoutPage from "./Pages/CheckoutPage/CheckoutPage";
 
