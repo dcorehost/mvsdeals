@@ -37,7 +37,7 @@ const MainNav = () => {
           </span>
           {isShopOpen && (
             <ul className={styles.dropdownMenu}>
-              <li><Link to="/mcafeeAntivirus">McAfeeAntivirus</Link></li>
+              <li><Link to="/mcafeeantivirus">McAfeeAntivirus</Link></li>
               <li><Link to="/shop/clothing">Clothing</Link></li>
               <li><Link to="/shop/home-appliances">Home Appliances</Link></li>
               <li><Link to="/shop/accessories">Accessories</Link></li>

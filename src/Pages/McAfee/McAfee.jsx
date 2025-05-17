@@ -7,7 +7,7 @@ import TopNav from "../../Components/TopNav/TopNav";
 
 
 
-const McAfeeAntivirus = () => {
+const McAfee = () => {
   return (
     <>
     <TopNav />
@@ -23,4 +23,4 @@ const McAfeeAntivirus = () => {
   );
 };
 
-export default McAfeeAntivirus;
+export default McAfee;

@@ -10,7 +10,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 import ShippingPolicy from "./Pages/ShippingPolicy/ShippingPolicy";
 import RefundPolicy from "./Pages/RefundPolicy/RefundPolicy";
 import TermsCondition from "./Pages/TermsCondition/TermsCondition";
-import McAfeeAntivirus from "../../src/Pages/McAfeeAntivirus/McAfeeAntivirus";
+import McAfee from "./Pages/";
 
 const App = () => {
   return (
@@ -23,6 +23,7 @@ const App = () => {
       <Route path="/shipping-policy" element={<ShippingPolicy />} />
       <Route path="/refund-policy" element={<RefundPolicy />} />
       <Route path="/terms-conditions" element={<TermsCondition />} />
+      <Route path="/test" element={<McAfee />} />
       {/* Add more routes here as needed */}
     </Routes>
   );
