@@ -14,6 +14,17 @@
   width: 50px;  /* Adjust the input field size */
   text-align: center;
 }
+.deleteButton {
+  background: none;
+  border: none;
+  color: #d11a2a;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  color: #a80000;
+}
 
 .cartTitle {
   font-size: 2rem;
