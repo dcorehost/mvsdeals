@@ -1,17 +1,17 @@
 import React from "react"; 
-import styles from "./McAFeeShop.module.css";
+import styles from "./AvastShop.module.css";
 import { assets } from '../../assets/assets';
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Auth from "../Services/Auth"; 
 
-const McAFeeShop = () => {
+const AvastShop = () => {
   const navigate = useNavigate();
 
   // Map the products to add sale information
-  const productsWithSale = assets.products2.map(product => {
-    const onSale = [1, 5, 8,].includes(product.id); 
+  const productsWithSale = assets.products5.map(product => {
+    const onSale = [3, 2,1,5,4,9,6,11,12, 8,].includes(product.id); 
     return {
       ...product,
       onSale,
@@ -107,4 +107,4 @@ const McAFeeShop = () => {
   );
 };
 
-export default McAFeeShop;
+export default AvastShop;

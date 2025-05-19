@@ -13,6 +13,9 @@ import TermsCondition from "./Pages/TermsCondition/TermsCondition";
 import McAfee from "./Pages/McAfee/McAfee";
 import AddCart from "./Pages/AddCart/AddCart";
 import CheckoutPage from "./Pages/CheckoutPage/CheckoutPage";
+import Norton from "./Pages/Norton/Norton";
+import AVG from "./Pages/AVG/AVG";
+import Avast from "./Pages/Avast/Avast";
 
 const App = () => {
   return (
@@ -28,6 +31,9 @@ const App = () => {
       <Route path="/mcafeeantivirus" element={<McAfee />} />
       <Route path="/cart" element={<AddCart />} />
       <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/nortonantivirus" element={<Norton />} />
+      <Route path="/avgantivirus" element={<AVG />} />
+      <Route path="/avastantivirus" element={<Avast />} />
       {/* Add more routes here as needed */}
     </Routes>
   );

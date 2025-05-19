@@ -1,22 +1,24 @@
 
-import CallUsMcAfee from "../../Components/CallUsMcAfee/CallUsMcAfee";
+import AvgBanner from "../../Components/AvgBanner/AvgBanner";
+import AVGShop from "../../Components/AVGShop/AVGShop";
+import CallUsAVG from "../../Components/CallUsAVG/CallUsAVG";
 import CommonBanner from "../../Components/CommonBanner/CommonBanner";
 import Footer from "../../Components/Footer/Footer";
 import MainNav from "../../Components/MainNav/MainNav";
-import McaBanner from "../../Components/McaBanner/McaBanner";
-import McAFeeShop from "../../Components/McAFeeShop/McAFeeShop";
 import TopNav from "../../Components/TopNav/TopNav";
 
 
 
-const McAfee = () => {
+const AVG = () => {
   return (
     <>
     <TopNav />
     <MainNav />
-    <McaBanner />
-    <McAFeeShop />
-    <CallUsMcAfee />
+    <AvgBanner />
+    <AVGShop />
+    <CallUsAVG />
+    
+
     <CommonBanner />
     <Footer />
     
@@ -27,4 +29,4 @@ const McAfee = () => {
   );
 };
 
-export default McAfee;
+export default AVG;

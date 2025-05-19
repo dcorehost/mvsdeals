@@ -1,0 +1,153 @@
+.wrapper {
+  background: linear-gradient(135deg, #121212, #2c2c2c); /* Dark black to grey */
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  overflow: hidden;
+}
+
+.content {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoSection {
+  margin-bottom: 20px;
+}
+
+.brandLogo {
+  max-width: 340px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 10px rgba(255, 165, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.brandLogo:hover {
+  transform: scale(1.05);
+}
+
+.textSection {
+  max-width: 700px;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: #ffcc80; /* Light orange */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin: 0 0 30px;
+  font-weight: 500;
+  color: #e0e0e0;
+}
+
+.callToAction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: pulse 2s infinite;
+}
+
+.phoneIcon {
+  font-size: 2.2rem;
+  color: #ff6f00; /* Vivid orange */
+  margin-bottom: 10px;
+  animation: ring 2s infinite;
+}
+
+.callText {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.phoneLink {
+  color: #ff9800; /* Accent orange */
+  text-decoration: none;
+  margin-left: 6px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.phoneLink:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #ff9800;
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 111, 0, 0.4);
+  }
+  70% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 20px rgba(255, 111, 0, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 111, 0, 0);
+  }
+}
+
+@keyframes ring {
+  0% { transform: rotate(0); }
+  15% { transform: rotate(15deg); }
+  30% { transform: rotate(-15deg); }
+  45% { transform: rotate(10deg); }
+  60% { transform: rotate(-10deg); }
+  75% { transform: rotate(5deg); }
+  100% { transform: rotate(0); }
+}
+
+/* Responsive Design */
+@media (min-width: 600px) {
+  .title {
+    font-size: 3rem;
+  }
+  .subtitle {
+    font-size: 1.4rem;
+  }
+  .callText {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .content {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .logoSection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .textSection {
+    flex: 2;
+    padding-left: 40px;
+  }
+
+  .callToAction {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+}
