@@ -1,22 +1,24 @@
 
-import CallUsMcAfee from "../../Components/CallUsMcAfee/CallUsMcAfee";
+import CallUsNorton from "../../Components/CallUsNorton/CallUsNorton";
 import CommonBanner from "../../Components/CommonBanner/CommonBanner";
 import Footer from "../../Components/Footer/Footer";
 import MainNav from "../../Components/MainNav/MainNav";
-import McaBanner from "../../Components/McaBanner/McaBanner";
-import McAFeeShop from "../../Components/McAFeeShop/McAFeeShop";
+import NortonBanner from "../../Components/NortonBanner/NortonBanner";
+import Nortonshop from "../../Components/Nortonshop/Nortonshop";
 import TopNav from "../../Components/TopNav/TopNav";
 
 
 
-const McAfee = () => {
+const Norton = () => {
   return (
     <>
     <TopNav />
     <MainNav />
-    <McaBanner />
-    <McAFeeShop />
-    <CallUsMcAfee />
+    <NortonBanner />
+    <Nortonshop />
+    <CallUsNorton />
+    
+
     <CommonBanner />
     <Footer />
     
@@ -27,4 +29,4 @@ const McAfee = () => {
   );
 };
 
-export default McAfee;
+export default Norton;
