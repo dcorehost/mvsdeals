@@ -16,6 +16,7 @@ import CheckoutPage from "./Pages/CheckoutPage/CheckoutPage";
 import Norton from "./Pages/Norton/Norton";
 import AVG from "./Pages/AVG/AVG";
 import Avast from "./Pages/Avast/Avast";
+import UpdatePassword from "./Pages/UpdatePassword/UpdatePassord";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
       <Route path="/nortonantivirus" element={<Norton />} />
       <Route path="/avgantivirus" element={<AVG />} />
       <Route path="/avastantivirus" element={<Avast />} />
+      <Route path="/update-password" element={<UpdatePassword />} />
       {/* Add more routes here as needed */}
     </Routes>
   );

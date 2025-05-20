@@ -21,12 +21,12 @@
 
 .text {
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.6;
 }
 
 .disclaimer {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   text-decoration: underline;
   display: block;
