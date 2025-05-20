@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from "../UpdatePassword/UpdatePassword.module.css"; // Assuming you have a CSS module for styles
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import styles from "../UpdatePassword/UpdatePassword.module.css";
 
 const UpdatePassword = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +10,17 @@ const UpdatePassword = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // 🔍 Extract email/token from URL query parameters
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    setEmail(params.get('email') || '');
+    setToken(params.get('token') || '');
+  }, [location.search]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,8 +28,7 @@ const UpdatePassword = () => {
       ...formData,
       [name]: value
     });
-    
-    // Clear error when user types
+
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -30,65 +39,72 @@ const UpdatePassword = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
     if (!formData.newPassword) {
       newErrors.newPassword = 'New password is required';
     } else if (formData.newPassword.length < 8) {
       newErrors.newPassword = 'Password must be at least 8 characters';
     }
-    
+
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = 'Please confirm your password';
     } else if (formData.newPassword !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
-    
+    if (!validateForm()) return;
+
     setIsSubmitting(true);
-    
+    setErrors({});
+    setSuccessMessage('');
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setSuccessMessage('Password updated successfully!');
-      
-      // Redirect to home page after 2 seconds
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
-    } catch (error) {
-      console.error('Error updating password:', error);
-      setErrors({ submit: 'Failed to update password. Please try again.' });
+      const formPayload = new FormData();
+      formPayload.append('email', email);
+      formPayload.append('token', token);
+      formPayload.append('new_password', formData.newPassword);
+      formPayload.append('confirm_password', formData.confirmPassword);
+
+      const response = await fetch('https://mvsdeals.online/updatePassword.php', {
+        method: 'POST',
+        body: formPayload
+      });
+
+      const result = await response.json();
+
+      if (result.error) {
+        setErrors({ submit: result.error });
+      } else {
+        setSuccessMessage(result.success);
+        setTimeout(() => navigate('/'), 2000);
+      }
+    } catch (err) {
+      setErrors({ submit: 'Server error. Please try again later.' });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="update-password-container">
-      <div className="update-password-card">
+    <div className={styles['update-password-container']}>
+      <div className={styles['update-password-card']}>
         <h2>Update Password</h2>
-        
+
         {successMessage && (
-          <div className="success-message">{successMessage}</div>
+          <div className={styles['success-message']}>{successMessage}</div>
         )}
-        
+
         {errors.submit && (
-          <div className="error-message">{errors.submit}</div>
+          <div className={styles['error-message']}>{errors.submit}</div>
         )}
-        
+
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label htmlFor="newPassword">New Password</label>
             <input
               type="password"
@@ -96,14 +112,14 @@ const UpdatePassword = () => {
               name="newPassword"
               value={formData.newPassword}
               onChange={handleChange}
-              className={errors.newPassword ? 'error' : ''}
+              className={errors.newPassword ? styles.error : ''}
             />
             {errors.newPassword && (
-              <span className="error-text">{errors.newPassword}</span>
+              <span className={styles['error-text']}>{errors.newPassword}</span>
             )}
           </div>
-          
-          <div className="form-group">
+
+          <div className={styles['form-group']}>
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               type="password"
@@ -111,16 +127,16 @@ const UpdatePassword = () => {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              className={errors.confirmPassword ? 'error' : ''}
+              className={errors.confirmPassword ? styles.error : ''}
             />
             {errors.confirmPassword && (
-              <span className="error-text">{errors.confirmPassword}</span>
+              <span className={styles['error-text']}>{errors.confirmPassword}</span>
             )}
           </div>
-          
-          <button 
-            type="submit" 
-            className="submit-btn"
+
+          <button
+            type="submit"
+            className={styles['submit-btn']}
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Updating...' : 'Update Password'}
