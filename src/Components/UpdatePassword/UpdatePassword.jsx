@@ -17,10 +17,18 @@ const UpdatePassword = () => {
 
   // 🔍 Extract email/token from URL query parameters
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    setEmail(params.get('email') || '');
-    setToken(params.get('token') || '');
-  }, [location.search]);
+  const params = new URLSearchParams(location.search);
+  const emailParam = params.get('email');
+  const tokenParam = params.get('token');
+  
+  if (!emailParam || !tokenParam) {
+    setErrors({ submit: 'Invalid or expired link.' });
+    return;
+  }
+  
+  setEmail(emailParam);
+  setToken(tokenParam);
+}, [location.search]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,39 +64,44 @@ const UpdatePassword = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
+  e.preventDefault();
+  if (!validateForm()) return;
 
-    setIsSubmitting(true);
-    setErrors({});
-    setSuccessMessage('');
+  if (!email || !token) {
+    setErrors({ submit: 'Missing email or token.' });
+    return;
+  }
 
-    try {
-      const formPayload = new FormData();
-      formPayload.append('email', email);
-      formPayload.append('token', token);
-      formPayload.append('new_password', formData.newPassword);
-      formPayload.append('confirm_password', formData.confirmPassword);
+  setIsSubmitting(true);
+  setErrors({});
+  setSuccessMessage('');
 
-      const response = await fetch('https://mvsdeals.online/updatePassword.php', {
-        method: 'POST',
-        body: formPayload
-      });
+  try {
+    const formPayload = new FormData();
+    formPayload.append('email', email);
+    formPayload.append('token', token);
+    formPayload.append('new_password', formData.newPassword);
+    formPayload.append('confirm_password', formData.confirmPassword);
 
-      const result = await response.json();
+    const response = await fetch('https://mvsdeals.online/updatePassword.php', {
+      method: 'POST',
+      body: formPayload
+    });
 
-      if (result.error) {
-        setErrors({ submit: result.error });
-      } else {
-        setSuccessMessage(result.success);
-        setTimeout(() => navigate('/'), 2000);
-      }
-    } catch (err) {
-      setErrors({ submit: 'Server error. Please try again later.' });
-    } finally {
-      setIsSubmitting(false);
+    const result = await response.json();
+
+    if (result.error) {
+      setErrors({ submit: result.error });
+    } else {
+      setSuccessMessage(result.success);
+      setTimeout(() => navigate('/'), 2000); // Redirect after success
     }
-  };
+  } catch (err) {
+    setErrors({ submit: 'Server error. Please try again later.' });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className={styles['update-password-container']}>
