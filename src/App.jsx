@@ -13,6 +13,7 @@ import TermsCondition from "./Pages/TermsCondition/TermsCondition";
 import McAfee from "./Pages/McAfee/McAfee";
 import AddCart from "./Pages/AddCart/AddCart";
 import CheckoutPage from "./Pages/CheckoutPage/CheckoutPage";
+import UpdatePasswordPage from "./Pages/UpdatePasswordPage/UpdatePasswordPage";
 
 const App = () => {
   return (
@@ -28,6 +29,8 @@ const App = () => {
       <Route path="/mcafeeantivirus" element={<McAfee />} />
       <Route path="/cart" element={<AddCart />} />
       <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/update-password" element={<UpdatePasswordPage />} />
+
       {/* Add more routes here as needed */}
     </Routes>
   );
