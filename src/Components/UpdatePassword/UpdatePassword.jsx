@@ -8,7 +8,7 @@ const UpdatePassword = () => {
     confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); 
   const [successMessage, setSuccessMessage] = useState('');
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
@@ -20,6 +20,9 @@ const UpdatePassword = () => {
   const params = new URLSearchParams(location.search);
   const emailParam = params.get('email');
   const tokenParam = params.get('token');
+  
+  console.log("Extracted email:", emailParam);
+  console.log("Extracted token:", tokenParam);
   
   if (!emailParam || !tokenParam) {
     setErrors({ submit: 'Invalid or expired link.' });
@@ -78,30 +81,37 @@ const UpdatePassword = () => {
 
   try {
     const formPayload = new FormData();
-    formPayload.append('email', email);
-    formPayload.append('token', token);
     formPayload.append('new_password', formData.newPassword);
     formPayload.append('confirm_password', formData.confirmPassword);
 
-    const response = await fetch('https://mvsdeals.online/updatePassword.php', {
+    console.log("New Password: ", formData.newPassword);
+    console.log("Confirm Password: ", formData.confirmPassword);
+
+    // ✅ Only ONE fetch call, with query parameters in URL
+    const response = await fetch(`https://mvsdeals.online/updatePassword.php?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`, {
       method: 'POST',
       body: formPayload
     });
 
+    console.log("Response Status:", response.status);
     const result = await response.json();
+    console.log("Response Body:", result);
 
-    if (result.error) {
-      setErrors({ submit: result.error });
+    // const result = await response.json();
+    if (!response.ok) {
+      setErrors({ submit: result.error || 'Something went wrong.' });
     } else {
-      setSuccessMessage(result.success);
+      setSuccessMessage(result.success || 'Password updated.');
       setTimeout(() => navigate('/'), 2000); // Redirect after success
     }
+
   } catch (err) {
     setErrors({ submit: 'Server error. Please try again later.' });
   } finally {
     setIsSubmitting(false);
   }
 };
+
 
   return (
     <div className={styles['update-password-container']}>
