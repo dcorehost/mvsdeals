@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
 import { useNavigate } from 'react-router-dom';
-import Auth from '../Services/Auth';  // Import the Auth service
+import Auth from '../Services/Auth';  
 
 const apiUrl = 'https://mvsdeals.online'; 
 
@@ -29,18 +29,18 @@ const LoginRegister = () => {
         // Save token and user data to Auth service or localStorage
         Auth.login({
           token: response.data.token,
-          username: response.data.email,  // You can replace it with the username if needed
+          username: response.data.email,  
           emailId: response.data.email,
-          user_id: response.data.user_id, // Add user_id here
+          user_id: response.data.user_id, 
         });
 
         toast.success(response.data.message); 
 
         setTimeout(() => {
-          navigate('/');  // Redirect to home page after successful login
+          navigate('/');  
         }, 1500);
       } else {
-        toast.error(response.data.error);  // Show error message from backend
+        toast.error(response.data.error);  
       }
     } catch (error) {
       toast.error('An error occurred during login. Please try again.');
@@ -58,15 +58,15 @@ const LoginRegister = () => {
       if (response.data.success) {
         toast.success('Registration successful! Check your email for further instructions.');
         console.log('Temporary Password:', response.data.temporary_password);
-        setActiveTab('login'); // Switch to login tab after successful registration
+        setActiveTab('login'); 
       } else {
-        toast.error(response.data.error);  // Show error message from backend
+        toast.error(response.data.error); 
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
-        toast.error(error.response.data.error);  // Error sent from backend
+        toast.error(error.response.data.error);  
       } else {
-        toast.error('An unexpected error occurred.');  // General error
+        toast.error('An unexpected error occurred.');  
       }
     }
   };

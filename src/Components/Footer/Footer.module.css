@@ -115,7 +115,7 @@
   background-color: black;
   text-align: center;
   color: #7f8c8d;
-  font-size: 1.3rem;
+  font-size: 1rem;
   line-height: 1.6;
   padding: 20px;
   border-top: 1px solid #34495e;
@@ -170,4 +170,16 @@
   .paymentLogo {
     height: 25px;
   }
+}
+
+.contactLink {
+  margin-left: 8px;
+  color: #ff9800; 
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contactLink:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }

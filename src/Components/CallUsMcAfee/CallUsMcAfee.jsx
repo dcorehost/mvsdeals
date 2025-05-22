@@ -1,17 +1,4 @@
-// import React from 'react';
-// import styles from './CallUsMcAfee.module.css';
 
-// const CallUsMcAfee = () => {
-//   return (
-//     <div className={styles.wrapper}>
-//       <h1 className={styles.bannerTitle}>
-//         CALL US: <a href="tel:+919089898709" className={styles.phoneLink}>+91 90898 98709</a>
-//       </h1>
-//     </div>
-//   );
-// };
-
-// export default CallUsMcAfee;
 
 import React from 'react';
 import styles from './CallUsMcAfee.module.css';

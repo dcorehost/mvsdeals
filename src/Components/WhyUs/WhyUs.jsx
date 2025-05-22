@@ -13,7 +13,7 @@ const WhyUs = () => {
         <div className={styles.rightcontainer}>
           <h2 className={styles.header}>Why Choose Us</h2>
           <p className={styles.text}>
-            At Avs Deals, we are dedicated to providing cutting-edge technology solutions tailored to your unique needs.
+            At MVS Deals, we are dedicated to providing cutting-edge technology solutions tailored to your unique needs.
             Specializing in security products, computer peripherals, and printer services, our knowledgeable team is here
             to guide you in selecting the right tools to enhance your digital experience. We offer expert advice,
             personalized recommendations, and comprehensive support, ensuring you receive reliable products that protect

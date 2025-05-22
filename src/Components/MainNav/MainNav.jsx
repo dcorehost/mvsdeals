@@ -14,7 +14,7 @@ const MainNav = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logoContainer}>
-        <h1 className={styles.logo}>AVS DEALS</h1>
+        <h1 className={styles.logo}>MVS DEALS</h1>
       </div>
       <ul className={styles.navLinks}>
         <li>

@@ -1,5 +1,5 @@
 .wrapper {
-  background: linear-gradient(135deg, #121212, #2c2c2c); /* Dark black to grey */
+  background: linear-gradient(135deg, #121212, #2c2c2c); 
   color: #fff;
   padding: 40px 20px;
   text-align: center;
@@ -42,7 +42,7 @@
   font-size: 2.4rem;
   font-weight: 800;
   margin: 0 0 10px;
-  color: #ffcc80; /* Light orange */
+  color: #ffcc80; 
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
@@ -62,7 +62,7 @@
 
 .phoneIcon {
   font-size: 2.2rem;
-  color: #ff6f00; /* Vivid orange */
+  color: #ff6f00; 
   margin-bottom: 10px;
   animation: ring 2s infinite;
 }
@@ -74,7 +74,7 @@
 }
 
 .phoneLink {
-  color: #ff9800; /* Accent orange */
+  color: #ff9800; 
   text-decoration: none;
   margin-left: 6px;
   font-weight: bold;

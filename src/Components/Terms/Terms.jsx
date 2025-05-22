@@ -7,9 +7,14 @@ const Terms = () => {
       
 
       <h6 className={styles.heading}>Eligibility</h6>
-      <p className={styles.paragraph}>
-        By using <span> avsdeals.online,</span>  you affirm that you are at least 18 years old or have the consent of a parent or guardian. Accessing the site constitutes acceptance of these Terms and our Privacy Policy.
-      </p>
+<p className={styles.paragraph}>
+  By using{' '}
+  <a href="https://mvsdeals.online" target="_blank" rel="noopener noreferrer">
+    mvsdeals.online
+  </a>
+  , you affirm that you are at least 18 years old or have the consent of a parent or guardian. Accessing the site
+  constitutes acceptance of these Terms and our Privacy Policy.
+</p>
 
       
 
@@ -21,11 +26,19 @@ const Terms = () => {
 
         </p>
        <h6 className={styles.heading}>3. Products & Accuracy of Information</h6>
-      <p className={styles.paragraph}>We strive to present our products and services accurately. However, errors may occur, such as incorrect product descriptions or pricing. <span>avsdeals.online </span> reserves the right to correct such errors and modify product information without prior notice.
+      {/* <p className={styles.paragraph}>We strive to present our products and services accurately. However, errors may occur, such as incorrect product descriptions or pricing. <span>mvsdeals.online </span> reserves the right to correct such errors and modify product information without prior notice.
 
         
        
-      </p>
+      </p> */}
+      <p className={styles.paragraph}>
+  We strive to present our products and services accurately. However, errors may occur, such as incorrect product
+  descriptions or pricing.{' '}
+  <a href="https://mvsdeals.online" target="_blank" rel="noopener noreferrer">
+    mvsdeals.online
+  </a>{' '}
+  reserves the right to correct such errors and modify product information without prior notice.
+</p>
        <h6 className={styles.heading}>4. Pricing & Payment</h6>
       <p className={styles.paragraph}>All prices are listed in ($). We accept multiple payment options, and you are responsible for ensuring the payment information is accurate. By placing an order, you authorize us to charge your selected payment method for the total amount, including any applicable taxes and shipping fees.
         
@@ -69,9 +82,17 @@ const Terms = () => {
      
 
        <h6 className={styles.heading}>9. Intellectual Property Rights</h6>
+      {/* <p className={styles.paragraph}>
+          All content on <span> mvsdeals.online</span> including but not limited to text, images, logos, and graphics, is our property or licensed to us and protected by intellectual property laws. Any unauthorized use, reproduction, or distribution is strictly prohibited.
+      </p> */}
       <p className={styles.paragraph}>
-          All content on <span> avsdeals.online</span> including but not limited to text, images, logos, and graphics, is our property or licensed to us and protected by intellectual property laws. Any unauthorized use, reproduction, or distribution is strictly prohibited.
-      </p>
+  All content on{' '}
+  <a href="https://mvsdeals.online" target="_blank" rel="noopener noreferrer">
+    mvsdeals.online
+  </a>, including but not limited to text, images, logos, and graphics, is our property or licensed to us and protected
+  by intellectual property laws. Any unauthorized use, reproduction, or distribution is strictly prohibited.
+</p>
+
        <h6 className={styles.heading}>10. Limitation of Liability</h6>
       <p className={styles.paragraph}>
         We are not responsible for any direct, indirect, or consequential damages arising from the use of this website or products purchased. Your sole remedy is to stop using the website or return the product according to our policies.
@@ -88,11 +109,21 @@ const Terms = () => {
       </p>
        <h6 className={styles.heading}>13. Contact Us</h6>
 
-      <h6 className={styles.heading}>ShopNewAVS.online</h6>
+      <h6 className={styles.heading}>ShopNewMVS.online</h6>
+      {/* <p className={styles.paragraph}>
+        <span className={styles.label}>Email:</span> info@mvsdeals.online<br />
+        <span className={styles.label}>Website:</span> mvsdeals.online
+      </p> */}
       <p className={styles.paragraph}>
-        <span className={styles.label}>Email:</span> info@avsdeals.online<br />
-        <span className={styles.label}>Website:</span> avsdeals.online
-      </p>
+  <span className={styles.label}>Email:</span>{' '}
+  <a href="mailto:info@mvsdeals.online">info@mvsdeals.online</a>
+  <br />
+  <span className={styles.label}>Website:</span>{' '}
+  <a href="https://mvsdeals.online" target="_blank" rel="noopener noreferrer">
+    mvsdeals.online
+  </a>
+</p>
+
 
     </div>
   );

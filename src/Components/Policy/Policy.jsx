@@ -91,20 +91,21 @@ const Policy = () => {
       <h6 className={styles.heading}>
          avdeals.online
       </h6>
-      <h6 className={styles.heading}>
-         email: 
-      </h6>
-      <p className={styles.paragraph}>
-        info@avsdeals.online
+     
+      <h6 className={styles.heading}>Email:</h6>
+<p className={styles.paragraph}>
+  <a href="mailto:info@mvsdeals.online" className={styles.contactLink}>
+    info@mvsdeals.online
+  </a>
+</p>
 
-      </p>
-       <h6 className={styles.heading}>
-         Website: 
-      </h6>
-      <p className={styles.paragraph}>
-        www.avdeals.online
+<h6 className={styles.heading}>Website:</h6>
+<p className={styles.paragraph}>
+  <a href="https://www.mvsdeals.online" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+    www.avdeals.online
+  </a>
+</p>
 
-      </p>
 
 
 

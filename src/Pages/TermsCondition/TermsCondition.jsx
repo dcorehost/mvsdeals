@@ -5,10 +5,6 @@ import Terms from "../../Components/Terms/Terms";
 import TermsBanner from "../../Components/TermsBanner/TermsBanner";
 import TopNav from "../../Components/TopNav/TopNav";
 
-
-
-
-
 const TermsCondition = () => {
   return (
     <>

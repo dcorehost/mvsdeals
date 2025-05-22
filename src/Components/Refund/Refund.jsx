@@ -4,9 +4,15 @@ import styles from "./Refund.module.css";
 const Refund = () => {
   return (
     <div className={styles.Container}>
+      
       <p className={styles.paragraph}>
-        At <span className={styles.brand}>Avs Deals</span>, we aim to deliver the best products and services. If you are not satisfied with your purchase, we offer a hassle-free return and refund process. Please read the following carefully to understand how it works.
-      </p>
+  At{' '}
+  <a href="https://mvsdeals.online" target="_blank" rel="noopener noreferrer" className={styles.brand}>
+    MVS Deals
+  </a>
+  , we aim to deliver the best products and services. If you are not satisfied with your purchase, we offer a hassle-free return and refund process. Please read the following carefully to understand how it works.
+</p>
+
 
       <h6 className={styles.heading}>1. Conditions for Return</h6>
       <p className={styles.paragraph}>
@@ -21,11 +27,14 @@ const Refund = () => {
          <p className={styles.paragraph}>
            Certain products are not eligible for return, such as digital products or software once the license has been activated. Opened antivirus or software that has been registered is non-returnable, as well as gift cards, promotional items, and clearance products.      
         </p>
-       <h6 className={styles.heading}>3. How to Initiate a Return</h6>
-      <p className={styles.paragraph}>To initiate a return, please contact our support team at info@avsdeals.online with your order number and reason for the return. Once your return request is approved, we will provide a return authorization with instructions. The product must be securely packaged and shipped to the address provided in the authorization.
-        
        
-      </p>
+      <h6 className={styles.heading}>3. How to Initiate a Return</h6>
+<p className={styles.paragraph}>
+  To initiate a return, please contact our support team at{' '}
+  <a href="mailto:info@mvsdeals.online">info@mvsdeals.online</a> with your order number and reason for the return.
+  Once your return request is approved, we will provide a return authorization with instructions.
+  The product must be securely packaged and shipped to the address provided in the authorization.
+</p>
        <h6 className={styles.heading}>4. Refund Processing</h6>
       <p className={styles.paragraph}>After we receive the returned product and confirm it meets the return conditions, we will notify you of the approval or rejection of your refund. Approved refunds will be processed within 7-10 business days and credited to your original payment method. Processing times may vary based on your bank or payment provider.
         
@@ -36,11 +45,13 @@ const Refund = () => {
         
        
       </p>
-       <h6 className={styles.heading}>6. Exchanges</h6>
-      <p className={styles.paragraph}>For exchanges, please reach out to us at <span>info@avsdeals.online.</span> If the product is eligible, we will guide you through the exchange process. Exchanges will only be processed once the original product is returned and inspected.
-        
-       
-      </p>
+      
+      <h6 className={styles.heading}>6. Exchanges</h6>
+<p className={styles.paragraph}>
+  For exchanges, please reach out to us at{' '}
+  <a href="mailto:info@mvsdeals.online">info@mvsdeals.online</a>. If the product is eligible, we will guide you through
+  the exchange process. Exchanges will only be processed once the original product is returned and inspected.
+</p>
        <h6 className={styles.heading}>7. Damaged or Incorrect Items</h6>
       <p className={styles.paragraph}>If you receive a damaged, defective, or incorrect product, notify us within 48 hours of receiving the order. We will arrange for a replacement or a full refund without additional charges.
 
@@ -53,11 +64,15 @@ const Refund = () => {
         If you have further questions about our return or refund policy, please contact us:
       </p>
 
-      <h6 className={styles.heading}>ShopNewAVS.online</h6>
+      <h6 className={styles.heading}>ShopNewMVS.online</h6>
+      
       <p className={styles.paragraph}>
-        <span className={styles.label}>Email:</span> info@avsdeals.online<br />
-        <span className={styles.label}>Website:</span> avsdeals.online
-      </p>
+  <span className={styles.label}>Email:</span>{' '}
+  <a href="mailto:info@mvsdeals.online">info@mvsdeals.online</a>
+  <br />
+  <span className={styles.label}>Website:</span>{' '}
+  <a href="https://mvsdeals.online" target="_blank" rel="noopener noreferrer">mvsdeals.online</a>
+</p>
 
     </div>
   );

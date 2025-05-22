@@ -11,7 +11,7 @@ const McaBanner = () => {
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.logoSection}>
-          <img src={assets.mcabanner} alt="AVS DEALS Logo" className={styles.brandLogo} />
+          <img src={assets.mcabanner} alt="MVS DEALS Logo" className={styles.brandLogo} />
         </div>
 
         <div className={styles.textSection}>

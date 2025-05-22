@@ -14,19 +14,9 @@
   flex-wrap: wrap;
 }
 
-/* .leftcontainer {
-  flex: 1 1 45%;
-  display: flex;
-  justify-content: center;
-}
 
-.image {
-  max-width: 100%;
-  height: 600px;
-  
-} */
  .leftcontainer {
-  flex: 1 1 53%; /* Increase image area */
+  flex: 1 1 53%; 
   display: flex;
   justify-content: center;
   align-items: center;

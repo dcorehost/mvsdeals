@@ -41,23 +41,23 @@ const AVGShop = () => {
       const response = await axios.post(
         "https://mvsdeals.online/addToCart.php", 
         {
-          user_id,  // Send user_id (match DB field)
+          user_id,  
           product_id: product.id,
           quantity: 1,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Send the Bearer token
-            'Content-Type': 'application/json', // Ensure the request is sent as JSON
+            Authorization: `Bearer ${token}`, 
+            'Content-Type': 'application/json', 
           }
         }
       );
 
       if (response.data.status === "success") {
-        navigate("/cart"); // Redirect to the cart page after successful add
+        navigate("/cart"); 
       } else {
         console.error("Add to cart failed:", response.data.message);
-        alert(response.data.message); // Show error message
+        alert(response.data.message); 
       }
     } catch (error) {
       console.error("API error:", error);

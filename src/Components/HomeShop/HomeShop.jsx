@@ -4,7 +4,7 @@ import { assets } from '../../assets/assets';
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Auth from "../Services/Auth"; // Import the Auth service
+import Auth from "../Services/Auth"; 
 
 const HomeShop = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const HomeShop = () => {
   // Function to handle adding a product to the cart
   const handleAddToCart = async (product) => {
     try {
-      const token = Auth.getToken(); // Get the token from localStorage using the Auth service
+      const token = Auth.getToken(); 
 
       if (!token) {
         alert("No authentication token found. Please log in.");
@@ -30,7 +30,7 @@ const HomeShop = () => {
       }
 
       // Get the dynamic user_id from the Auth service
-      const user_id = Auth.getUserId();  // Fetch user_id from localStorage
+      const user_id = Auth.getUserId();  
 
       if (!user_id) {
         alert("User is not logged in. Please log in.");
@@ -41,23 +41,23 @@ const HomeShop = () => {
       const response = await axios.post(
         "https://mvsdeals.online/addToCart.php", 
         {
-          user_id,  // Send user_id (match DB field)
+          user_id,  
           product_id: product.id,
           quantity: 1,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Send the Bearer token
-            'Content-Type': 'application/json', // Ensure the request is sent as JSON
+            Authorization: `Bearer ${token}`, 
+            'Content-Type': 'application/json', 
           }
         }
       );
 
       if (response.data.status === "success") {
-        navigate("/cart"); // Redirect to the cart page after successful add
+        navigate("/cart"); 
       } else {
         console.error("Add to cart failed:", response.data.message);
-        alert(response.data.message); // Show error message
+        alert(response.data.message); 
       }
     } catch (error) {
       console.error("API error:", error);
@@ -81,7 +81,7 @@ const HomeShop = () => {
               />
               <div 
                 className={styles.addToCartIcon}
-                onClick={() => handleAddToCart(product)} // Call the function to add the product to cart
+                onClick={() => handleAddToCart(product)} 
               >
                 <FaCartPlus />
               </div>
@@ -96,7 +96,7 @@ const HomeShop = () => {
             </div>
             <button 
               className={styles.addToCartButton}
-              onClick={() => handleAddToCart(product)} // Call the function to add the product to cart
+              onClick={() => handleAddToCart(product)} 
             >
               Add to Cart
             </button>

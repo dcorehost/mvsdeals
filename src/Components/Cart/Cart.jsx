@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Cart.module.css';
 import axios from 'axios';
 import Auth from '../Services/Auth';
-import { FaTrashAlt } from 'react-icons/fa'; // Trash icon
+import { FaTrashAlt } from 'react-icons/fa'; 
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
