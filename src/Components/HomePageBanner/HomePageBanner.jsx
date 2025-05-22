@@ -1,4 +1,3 @@
-
 import React from 'react';
 import styles from './HomePageBanner.module.css';
 import { assets } from "../../assets/assets.jsx";
