@@ -10,9 +10,21 @@ const Shipping = () => {
         <span>1.1</span> Information You Provide
       </h6>
 
+      
       <p className={styles.paragraph}>
-        <span>1.</span> At <span className={styles.brand}>Avs Deals</span>, we strive to deliver a seamless and efficient experience for our customers. Below is our shipping policy for all software products purchased from our website.
-      </p>
+  <span>1.</span>{' '}
+  At{' '}
+  <a
+    href="https://mvsdeals.online"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={styles.brand}
+  >
+    MVS Deals
+  </a>
+  , we strive to deliver a seamless and efficient experience for our customers. Below is our shipping policy for all software products purchased from our website.
+</p>
+
 
       <h6 className={styles.heading}>Delivery Process</h6>
 
@@ -59,9 +71,14 @@ const Shipping = () => {
                   </p>
       <h6 className={styles.heading}>Delivery Issues</h6>
        <ul className={styles.list}>
+        
         <li className={styles.listitem}>
-            If you do not receive your digital product within the promised timeframe, please check your spam/junk email folder or contact us immediately at<span> support@avsdeals.online.</span>
-        </li>
+  If you do not receive your digital product within the promised timeframe, please check your spam/junk email folder or contact us immediately at&nbsp;
+  <a href="mailto:support@mvsdeals.online" className={styles.emailLink}>
+    support@mvsdeals.online
+  </a>.
+</li>
+
         <li className={styles.listitem}>
             For physical shipments, please allow up to <span>48 hours</span> for tracking information to update. If your package does not arrive within the estimated delivery period, reach out to us for assistance.
         </li>
@@ -74,10 +91,12 @@ const Shipping = () => {
             </ul>
 
                  <h6 className={styles.heading}>Support</h6>
-                 <p className={styles.paragraph}>
-                    For any questions or concerns regarding shipping, feel free to contact us at <span>support@avsdeals.online.</span>We’re here to help!
+                
+                    <p className={styles.paragraph}>
+  For any questions or concerns regarding shipping, feel free to contact us at{' '}
+  <a href="mailto:support@mvsdeals.online">support@mvsdeals.online</a>. We’re here to help!
+</p>
 
-                    </p>
 
 
     </div>

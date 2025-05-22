@@ -4,7 +4,7 @@ import { assets } from "../../assets/assets.jsx";
 import { FaShoppingCart, FaSmile } from 'react-icons/fa';
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { SlWallet } from "react-icons/sl";
-
+   
 const HomePageBanner = () => {
   return (
     <div className={styles.wrapper}>

@@ -30,6 +30,7 @@ import avgbanner from './avgbanner.jpg';
 import avastbanner from './avastbanner.jpg';
 import mcabanner from './mcabanner.jpg';
 import nortonbanner from './nortonbanner.jpg';
+import sale from './sale.jpg';
 
 export const assets = {
   homebanner,
@@ -63,6 +64,7 @@ export const assets = {
   avastbanner,
   mcabanner,
   nortonbanner,
+  sale,
 
   // Product list for HomeShop.jsx
   products: [

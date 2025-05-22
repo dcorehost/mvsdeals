@@ -17,8 +17,7 @@ const PrivacyPolicy = () => {
     <PrivacyBanner />
     <Policy />
     <CommonBanner />
-    <Footer />
-    
+    <Footer />  
     
 
    

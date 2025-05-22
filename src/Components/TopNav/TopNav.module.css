@@ -1,71 +1,4 @@
-/* .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f8f8f8;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .left {
-    display: flex;
-    gap: 20px;
-    font-size: 0.9rem;
-  }
-  
-  .left span {
-    display: flex;
-    align-items: center;
-    color: #333;
-  }
-  
-  .left span svg {
-    margin-right: 8px;
-    color: #007bff;
-  }
-  
-  .right {
-    font-size: 1rem;
-    color: #d9534f;
-  }
-  
-  @media (max-width: 768px) {
-    .topbar {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 15px;
-    }
-  
-    .left {
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-  
-    .left span {
-      font-size: 0.8rem;
-    }
-  
-    .right {
-      font-size: 0.9rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .topbar {
-      padding: 10px;
-    }
-  
-    .left {
-      font-size: 0.8rem;
-    }
-  
-    .right {
-      font-size: 0.8rem;
-    }
-  }
-   */
-
+/* 
 
 .topbar {
   display: flex;
@@ -108,3 +41,63 @@
 
 
   }
+
+  .left a {
+  color: inherit;
+  text-decoration: none;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.left a:hover {
+  text-decoration: underline;
+} */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 30px;
+  background: linear-gradient(to right, #141e30, #243b55); /* dark blue gradient */
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 17px;
+}
+
+.left {
+  display: flex;
+  gap: 25px;
+}
+
+.left a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+}
+
+.left a:hover {
+  color: #ff9900; /* gold */
+  transform: translateY(-1px);
+}
+
+.right p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #ff9900;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.arrowIcon {
+  font-size: 18px;
+  color: #ff9900;
+}
+

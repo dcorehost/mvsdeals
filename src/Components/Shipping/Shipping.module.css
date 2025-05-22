@@ -77,3 +77,14 @@
     font-size: 14px;
   }
 }
+.emailLink {
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.emailLink:hover {
+  color: #007bff;
+  text-decoration: underline;
+}

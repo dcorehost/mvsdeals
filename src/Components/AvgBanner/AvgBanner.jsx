@@ -11,7 +11,7 @@ const AvgBanner = () => {
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.logoSection}>
-          <img src={assets.avgbanner} alt="AVS DEALS Logo" className={styles.brandLogo} />
+          <img src={assets.avgbanner} alt="MVS DEALS Logo" className={styles.brandLogo} />
         </div>
 
         <div className={styles.textSection}>

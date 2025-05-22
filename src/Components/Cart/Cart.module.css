@@ -7,11 +7,11 @@
 }
 
 .cartTable tr.highlightedRow {
-  background-color: #f0f8ff; /* Light blue background for highlighted row */
+  background-color: #f0f8ff; 
 }
 
 .quantityInput {
-  width: 50px;  /* Adjust the input field size */
+  width: 50px;  
   text-align: center;
 }
 .deleteButton {
