@@ -11,7 +11,7 @@ const CallUsNorton = () => {
       <div className={styles.callContainer}>
         <FaPhoneAlt className={styles.phoneIcon} />
         <h1 className={styles.bannerTitle}>
-          CALL US: <a href="tel:+919089898709" className={styles.phoneLink}>+91 90898 98709</a>
+          CALL US: <a href="tel:+1 (888) 9716668" className={styles.phoneLink}>+1 (888) 9716668</a>
         </h1>
       </div>
     </div>

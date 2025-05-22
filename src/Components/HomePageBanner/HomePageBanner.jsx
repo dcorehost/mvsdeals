@@ -18,7 +18,10 @@ const HomePageBanner = () => {
             Get top-rated antivirus protection from McAfee or Norton. Safeguard your devices against 
             the latest threats with reliable and innovative security solutions.
           </p>
-          <button className={styles.discoverButton}>Discover Shop</button>
+          {/* <button className={styles.discoverButton}>Discover Shop</button> */}
+          <a href="/mcafeeantivirus">
+  <button className={styles.discoverButton}>Discover Shop</button>
+</a>
         </div>
       </div>
 
