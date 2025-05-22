@@ -8,7 +8,7 @@ const UpdatePassword = () => {
     confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); 
   const [successMessage, setSuccessMessage] = useState('');
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
