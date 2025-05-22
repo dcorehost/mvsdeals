@@ -3,10 +3,11 @@
   color: #ecf0f1;
   padding: 40px 0 20px;
   font-family: 'Arial', sans-serif;
+  width: 100%;
 }
 
 .container {
-  max-width: 1200px;
+  /* max-width: 00px; */
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -50,7 +51,7 @@
 }
 
 .linksTitle {
-  font-size: 2rem;
+  font-size: 1.6rem;
   margin-bottom: 20px;
   color: #fff;
   position: relative;
@@ -111,7 +112,7 @@
 
 
  .copyrightSection {
-  width: 97.5%;
+  width: 97%;
   background-color: black;
   text-align: center;
   color: #7f8c8d;

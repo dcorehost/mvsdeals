@@ -33,7 +33,7 @@ const Footer = () => {
             <div className={styles.linksColumn}>
               <h3 className={styles.linksTitle}>Quick Links</h3>
               <ul className={styles.linksList}>
-                <li><a href="#">Products</a></li>
+                <li><a href="/nortonantivirus">Products</a></li>
                 <li><a href="/about-us">About Us</a></li>
                 <li><a href="/contact-us">Contact Us</a></li>
                 <li><a href="/account">My Account</a></li>
@@ -48,7 +48,7 @@ const Footer = () => {
           </li>
          <li>
            <FaPhoneAlt className={styles.contactIcon} />
-         <a href="tel:+18575575285" className={styles.contactLink}>+1-857-557-5285</a>
+         <a href="tel:+18575575285" className={styles.contactLink}>+1 (888) 9716668</a>
        </li>
        <li>
         <HiLocationMarker className={styles.contactIcon} />
