@@ -21,6 +21,9 @@ const UpdatePassword = () => {
   const emailParam = params.get('email');
   const tokenParam = params.get('token');
   
+  console.log("Extracted email:", emailParam);
+  console.log("Extracted token:", tokenParam);
+  
   if (!emailParam || !tokenParam) {
     setErrors({ submit: 'Invalid or expired link.' });
     return;
