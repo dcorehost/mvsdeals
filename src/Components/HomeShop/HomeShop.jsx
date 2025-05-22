@@ -1,69 +1,92 @@
-import React from "react"; 
+import React from "react";
 import styles from "./HomeShop.module.css";
 import { assets } from '../../assets/assets';
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Auth from "../Services/Auth"; 
+import Auth from "../Services/Auth";
 
 const HomeShop = () => {
   const navigate = useNavigate();
 
-  // Map the products to add sale information
+  // Improved cross-browser session ID generator
+  const getSessionId = () => {
+    let sessionId = localStorage.getItem("session_id");
+    if (!sessionId) {
+      if (window.crypto && window.crypto.randomUUID) {
+        sessionId = crypto.randomUUID();
+      } else {
+        sessionId = Math.random().toString(36).substring(2) + Date.now().toString(36);
+      }
+      localStorage.setItem("session_id", sessionId);
+    }
+    return sessionId;
+  };
+
+  const [loading, setLoading] = React.useState(false);
+
+  const handleAddToCart = async (product) => {
+    // Log the product data to ensure it contains id and other properties
+    console.log("Product Data:", product);
+  
+    if (!product || !product.id) {
+      console.error("Invalid product data:", product);
+      alert("Product data is missing or incomplete.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const token = Auth.getToken();
+      const user_id = Auth.getUserId();
+      const session_id = getSessionId();
+
+      // Log the session and user ID to ensure correct values
+      console.log("User ID:", user_id, "Session ID:", session_id);
+
+      const payload = {
+        product_id: product.id, // Make sure the product has an id
+        quantity: 1,
+        ...(user_id && token ? { user_id } : { session_id }) // Ensure user_id or session_id is present
+      };
+
+      // Log the payload before sending to backend
+      console.log("Payload:", payload);
+
+      const headers = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const response = await axios.post(
+        "https://mvsdeals.online/addToCart.php",
+        payload,
+        { headers }
+      );
+
+      // Log the response from API
+      console.log("API Response:", response);
+
+      if (response.data.status === "success") {
+        alert("Product added to cart!");
+        navigate("/cart");
+      } else {
+        alert("Failed to add product: " + response.data.message);
+      }
+    } catch (error) {
+      console.error("API error:", error);
+      alert("Could not add product to cart.");
+    } finally {
+      setLoading(false); // Reset loading state
+    }
+  };
+
   const productsWithSale = assets.products.map(product => {
-    const onSale = [1, 7, 8, 9, 10, 11, 13, 14, 15, 16].includes(product.id); 
+    const onSale = [1, 7, 8, 9, 10, 11, 13, 14, 15, 16].includes(product.id);
     return {
       ...product,
       onSale,
       saleText: onSale ? "Sale!" : null
     };
   });
-
-  // Function to handle adding a product to the cart
-  const handleAddToCart = async (product) => {
-    try {
-      const token = Auth.getToken(); 
-
-      if (!token) {
-        alert("No authentication token found. Please log in.");
-        return;
-      }
-
-      // Get the dynamic user_id from the Auth service
-      const user_id = Auth.getUserId();  
-
-      if (!user_id) {
-        alert("User is not logged in. Please log in.");
-        return;
-      }
-
-      // Post the data to the backend
-      const response = await axios.post(
-        "https://mvsdeals.online/addToCart.php", 
-        {
-          user_id,  
-          product_id: product.id,
-          quantity: 1,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, 
-            'Content-Type': 'application/json', 
-          }
-        }
-      );
-
-      if (response.data.status === "success") {
-        navigate("/cart"); 
-      } else {
-        console.error("Add to cart failed:", response.data.message);
-        alert(response.data.message); 
-      }
-    } catch (error) {
-      console.error("API error:", error);
-      alert("Something went wrong while adding to cart.");
-    }
-  };
 
   return (
     <div className={styles.container}>    
@@ -97,8 +120,9 @@ const HomeShop = () => {
             <button 
               className={styles.addToCartButton}
               onClick={() => handleAddToCart(product)} 
+              disabled={loading}
             >
-              Add to Cart
+              {loading ? "Adding..." : "Add to Cart"}
             </button>
           </div>
         ))}

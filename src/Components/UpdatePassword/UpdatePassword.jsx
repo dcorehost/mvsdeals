@@ -12,26 +12,30 @@ const UpdatePassword = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
+  const [loading, setLoading] = useState(true); // Added loading state
   const navigate = useNavigate();
   const location = useLocation();
 
   // 🔍 Extract email/token from URL query parameters
   useEffect(() => {
-  const params = new URLSearchParams(location.search);
-  const emailParam = params.get('email');
-  const tokenParam = params.get('token');
-  
-  console.log("Extracted email:", emailParam);
-  console.log("Extracted token:", tokenParam);
-  
-  if (!emailParam || !tokenParam) {
-    setErrors({ submit: 'Invalid or expired link.' });
-    return;
-  }
-  
-  setEmail(emailParam);
-  setToken(tokenParam);
-}, [location.search]);
+    console.log("useEffect triggered"); // Debugging log
+    const params = new URLSearchParams(location.search);
+    const emailParam = params.get('email');
+    const tokenParam = params.get('token');
+
+    console.log("emailParam:", emailParam); // Debugging log
+    console.log("tokenParam:", tokenParam); // Debugging log
+
+    if (!emailParam || !tokenParam) {
+      setErrors({ submit: 'Invalid or expired link.' });
+      setLoading(false); // Stop loading if parameters are missing
+      return;
+    }
+
+    setEmail(emailParam);
+    setToken(tokenParam);
+    setLoading(false); // Stop loading after parameters are set
+  }, [location.search]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,51 +71,54 @@ const UpdatePassword = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!validateForm()) return;
+    e.preventDefault();
+    if (!validateForm()) return;
 
-  if (!email || !token) {
-    setErrors({ submit: 'Missing email or token.' });
-    return;
-  }
-
-  setIsSubmitting(true);
-  setErrors({});
-  setSuccessMessage('');
-
-  try {
-    const formPayload = new FormData();
-    formPayload.append('new_password', formData.newPassword);
-    formPayload.append('confirm_password', formData.confirmPassword);
-
-    console.log("New Password: ", formData.newPassword);
-    console.log("Confirm Password: ", formData.confirmPassword);
-
-    // ✅ Only ONE fetch call, with query parameters in URL
-    const response = await fetch(`https://mvsdeals.online/updatePassword.php?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`, {
-      method: 'POST',
-      body: formPayload
-    });
-
-    console.log("Response Status:", response.status);
-    const result = await response.json();
-    console.log("Response Body:", result);
-
-    // const result = await response.json();
-    if (!response.ok) {
-      setErrors({ submit: result.error || 'Something went wrong.' });
-    } else {
-      setSuccessMessage(result.success || 'Password updated.');
-      setTimeout(() => navigate('/'), 2000); // Redirect after success
+    if (!email || !token) {
+      setErrors({ submit: 'Missing email or token.' });
+      return;
     }
 
-  } catch (err) {
-    setErrors({ submit: 'Server error. Please try again later.' });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+    setIsSubmitting(true);
+    setErrors({});
+    setSuccessMessage('');
 
+    try {
+      const formPayload = new FormData();
+      formPayload.append('new_password', formData.newPassword);
+      formPayload.append('confirm_password', formData.confirmPassword);
+
+      console.log("New Password: ", formData.newPassword); // Debugging log
+      console.log("Confirm Password: ", formData.confirmPassword); // Debugging log
+
+      // ✅ Only ONE fetch call, with query parameters in URL
+      const response = await fetch(`https://mvsdeals.online/updatePassword.php?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`, {
+        method: 'POST',
+        body: formPayload
+      });
+
+      console.log("Response Status:", response.status); // Debugging log
+      const result = await response.json();
+      console.log("Response Body:", result); // Debugging log
+
+      if (!response.ok) {
+        setErrors({ submit: result.error || 'Something went wrong.' });
+      } else {
+        setSuccessMessage(result.success || 'Password updated.');
+        setTimeout(() => navigate('/'), 2000); // Redirect after success
+      }
+
+    } catch (err) {
+      setErrors({ submit: 'Server error. Please try again later.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // If it's still loading, don't show the form yet
+  if (loading) {
+    return <div>Loading...</div>; // Or a loading spinner
+  }
 
   return (
     <div className={styles['update-password-container']}>

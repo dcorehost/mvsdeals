@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Cart.module.css';
 import axios from 'axios';
-import Auth from '../Services/Auth';
-import { FaTrashAlt } from 'react-icons/fa'; 
+import { FaTrashAlt } from 'react-icons/fa';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -11,21 +10,23 @@ const Cart = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = Auth.getToken();
-    const userId = Auth.getUserId();
-
-    if (!token || !userId) {
-      setError("Please log in to view your cart.");
-      setLoading(false);
-      return;
+  // Function to get or generate session ID
+  const getSessionId = () => {
+    let sessionId = localStorage.getItem("session_id");
+    if (!sessionId) {
+      sessionId = Math.random().toString(36).substring(2) + Date.now().toString(36);
+      localStorage.setItem("session_id", sessionId);
     }
+    return sessionId;
+  };
+
+  useEffect(() => {
+    const sessionId = getSessionId(); // Get the session_id from localStorage
 
     const fetchCart = async () => {
       try {
-        const response = await axios.get(`https://mvsdeals.online/getCart.php?user_id=${userId}`, {
+        const response = await axios.get(`https://mvsdeals.online/getCart.php?session_id=${sessionId}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         });
@@ -52,7 +53,7 @@ const Cart = () => {
 
   const handleQuantityChange = (id, newQuantity) => {
     const updatedCart = cartItems.map(item =>
-      item.id === id
+      item.product_id === id
         ? {
             ...item,
             quantity: newQuantity,
@@ -61,22 +62,32 @@ const Cart = () => {
         : item
     );
     setCartItems(updatedCart);
+
+    // Send update to the server (optional)
+    const sessionId = getSessionId();
+    axios.post('https://mvsdeals.online/updateCart.php', {
+      session_id: sessionId,
+      product_id: id,
+      quantity: newQuantity
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   };
 
   const handleDeleteItem = async (productId) => {
-    const token = Auth.getToken();
-    const userId = Auth.getUserId();
+    const sessionId = getSessionId();
 
     try {
       const response = await axios.post(
         'https://mvsdeals.online/deleteFromCart.php',
         {
-          user_id: userId,
+          session_id: sessionId,
           product_id: productId
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         }
@@ -94,6 +105,10 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
+    if (cartItems.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
     navigate('/checkout', {
       state: {
         cartItems,
@@ -127,17 +142,17 @@ const Cart = () => {
             </thead>
             <tbody>
               {cartItems.map((item) => (
-                <tr key={item.id}>
-<td>
-  <img 
-    src={`https://mvsdeals.online/images/${item.image}`} 
-    alt={item.name} 
-    className={styles.cartImage}
-    width="100"
-    height="100"
-  />
-</td>
-                  <td>{item.name}</td>
+                <tr key={item.product_id}>
+                  <td>
+                    <img
+                      src={`https://mvsdeals.online/images/${item.image}`} 
+                      alt={item.name} 
+                      className={styles.cartImage}
+                      width="100"
+                      height="100"
+                    />
+                  </td>
+                  <td>{item.name || item.display_name}</td>
                   <td>${item.price}</td>
                   <td>
                     <input
@@ -145,7 +160,7 @@ const Cart = () => {
                       value={item.quantity}
                       min="1"
                       onChange={(e) =>
-                        handleQuantityChange(item.id, parseInt(e.target.value))
+                        handleQuantityChange(item.product_id, parseInt(e.target.value))
                       }
                       className={styles.quantityInput}
                     />
@@ -168,13 +183,6 @@ const Cart = () => {
       ) : (
         <div>Your cart is empty.</div>
       )}
-
-      <div className={styles.couponSection}>
-        <h3 className={styles.couponTitle}>Coupon code</h3>
-        <button className={styles.couponButton}>Apply coupon</button>
-      </div>
-
-      <div className={styles.divider}></div>
 
       <div className={styles.cartTotals}>
         <h2 className={styles.totalsTitle}>Cart totals</h2>

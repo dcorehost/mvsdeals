@@ -64,7 +64,22 @@ const Auth = {
   getUserId: () => {
     // Get the user_id from localStorage
     return localStorage.getItem("user_id"); // Retrieve user_id
+  },
+
+   getSessionId: () => {
+    let sessionId = localStorage.getItem("session_id");
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      localStorage.setItem("session_id", sessionId);
+    }
+    return sessionId;
+  },
+
+  // ✅ NEW: Utility to determine if guest
+  isGuest: () => {
+    return !Auth.isAuthenticated();
   }
 };
+
 
 export default Auth;

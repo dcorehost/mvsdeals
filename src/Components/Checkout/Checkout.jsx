@@ -34,14 +34,16 @@ const Checkout = () => {
 
   const handlePlaceOrder = async () => {
     const user_id = Auth.getUserId();
+    const session_id = Auth.getSessionId();
 
-    if (!user_id) {
+    // If user is not logged in
+    if (!user_id && !session_id) {
       alert("User not logged in");
       return;
     }
 
     const payload = {
-      user_id,
+      email: billing.email,
       billing,
       cartItems: cartItems.map((item) => ({
         product_id: item.product_id,
@@ -51,41 +53,55 @@ const Checkout = () => {
         subtotal: item.subtotal,
       })),
       total,
+      user_id,
+      session_id,
     };
 
     try {
-      const response = await axios.post(
-        "https://mvsdeals.online/checkout.php",
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+      // Check if the user exists or register them
+      const registerResponse = await axios.post(
+        "https://mvsdeals.online/register.php", // Your PHP registration endpoint
+        { email: billing.email }
       );
 
-      if (response.data.status === "success") {
-        alert("Order placed successfully!");
-        setBilling({
-          first_name: "",
-          last_name: "",
-          company: "",
-          country: "India",
-          address: "",
-          apartment: "",
-          city: "",
-          state: "",
-          zip: "",
-          phone: "",
-          email: "",
-          notes: "",
-        });
+      if (registerResponse.data.success) {
+        alert(registerResponse.data.message); // Show message from PHP about user registration
 
-        // Navigate to home
-        navigate("/");
-        // Optional: redirect or reset form
+        // Proceed with the order after registration
+        const orderResponse = await axios.post(
+          "https://mvsdeals.online/checkout.php", // Your PHP checkout endpoint
+          payload,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (orderResponse.data.success) {
+          alert("Order placed successfully!");
+          setBilling({
+            first_name: "",
+            last_name: "",
+            company: "",
+            country: "India",
+            address: "",
+            apartment: "",
+            city: "",
+            state: "",
+            zip: "",
+            phone: "",
+            email: "",
+            notes: "",
+          });
+
+          // Optionally navigate to home or order confirmation page
+          navigate("/");
+        } else {
+          alert("Order failed: " + orderResponse.data.message);
+        }
       } else {
-        alert("Order failed: " + response.data.message);
+        alert("Registration failed: " + registerResponse.data.error);
       }
     } catch (error) {
       alert("Something went wrong during checkout.");
