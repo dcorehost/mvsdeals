@@ -20,7 +20,7 @@ const AvastBanner = () => {
           <div className={styles.callToAction}>
             <FaPhoneAlt className={styles.phoneIcon} />
             <h2 className={styles.callText}>
-              CALL CUSTOMER CARE: <a href="tel:+1 (888) 9716668" className={styles.phoneLink}>+1 (888) 9716668</a>
+              CALL CUSTOMER CARE: <a href="tel:+1 (888) 971-6668" className={styles.phoneLink}>+1 (888) 971-6668</a>
             </h2>
           </div>
         </div>

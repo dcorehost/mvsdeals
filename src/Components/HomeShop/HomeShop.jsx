@@ -74,11 +74,18 @@ const HomeShop = () => {
               {product.onSale && (
                 <div className={styles.saleBadge}>{product.saleText}</div>
               )}
-              <img 
+              {/* <img 
                 src={product.image} 
                 alt={product.name} 
                 className={styles.productImage} 
-              />
+              /> */}
+              <img
+  src={product.image}
+  alt={product.name}
+  className={styles.productImage}
+  onClick={() => navigate(`/product/${product.id}`)}
+  style={{ cursor: "pointer" }}
+/>
               <div 
                 className={styles.addToCartIcon}
                 onClick={() => handleAddToCart(product)} 

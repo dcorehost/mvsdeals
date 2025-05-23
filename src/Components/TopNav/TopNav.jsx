@@ -68,8 +68,8 @@ const TopNav = () => {
         <a href="mailto:info@mvsdeals.online">
           <FaEnvelope /> info@mvsdeals.online
         </a>
-        <a href="tel:+1 (888) 9716668">
-          <FaPhoneAlt /> +1 (888) 9716668
+        <a href="tel:+1 (888) 971-6668">
+          <FaPhoneAlt /> +1 (888) 971-6668
         </a>
       </div>
     </div>

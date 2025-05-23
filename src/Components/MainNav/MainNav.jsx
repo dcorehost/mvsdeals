@@ -14,7 +14,10 @@ const MainNav = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logoContainer}>
-        <h1 className={styles.logo}>MVS DEALS</h1>
+        {/* <h1 className={styles.logo}>MVS DEALS</h1> */}
+        <Link to="/" className={pathname === "/" ? styles.active : ""}>
+            MVS Deals
+          </Link>
       </div>
       <ul className={styles.navLinks}>
         <li>

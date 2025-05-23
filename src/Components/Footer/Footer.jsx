@@ -48,11 +48,11 @@ const Footer = () => {
           </li>
          <li>
            <FaPhoneAlt className={styles.contactIcon} />
-         <a href="tel:+18575575285" className={styles.contactLink}>+1 (888) 9716668</a>
+         <a href="tel:+18575575285" className={styles.contactLink}>+1 (888) 971-6668</a>
        </li>
        <li>
         <HiLocationMarker className={styles.contactIcon} />
-           149 Settlement Drive Apt 45, Bastrop, TX 78602
+           9 9th Ave, New York, NY 10014, United States
            </li>
             <li className={styles.paymentItem}>
             <img src={assets.visa} alt="VISA" className={styles.paymentLogo} />
