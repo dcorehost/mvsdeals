@@ -8,7 +8,7 @@ const CallUsAvast = () => {
       <div className={styles.callContainer}>
         <FaPhoneAlt className={styles.phoneIcon} />
         <h1 className={styles.bannerTitle}>
-          CALL US: <a href="tel:+1 (888) 9716668" className={styles.phoneLink}>+1 (888) 9716668</a>
+          CALL US: <a href="tel:+1 (888) 971-6668" className={styles.phoneLink}>+1 (888) 971-6668</a>
         </h1>
       </div>
     </div>
