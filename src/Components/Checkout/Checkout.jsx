@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Checkout.module.css";
 import { FaCreditCard } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import axios from "axios";
 import Auth from "../Services/Auth";
-import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const location = useLocation();
@@ -13,9 +12,9 @@ const Checkout = () => {
   const { cartItems = [], total = "0.00" } = location.state || {};
 
   const [billing, setBilling] = useState({
-    first_name: "",
+    first_name: "", 
     last_name: "",
-    company: "",
+    company: "",       // <-- UPDATED: all fields present
     country: "India",
     address: "",
     apartment: "",
@@ -33,81 +32,76 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = async () => {
-    const user_id = Auth.getUserId();
-    const session_id = Auth.getSessionId();
+  const session_id = Auth.getSessionId();
 
-    // If user is not logged in
-    if (!user_id && !session_id) {
-      alert("User not logged in");
+  if (!session_id) {
+    alert("Session expired or invalid.");
+    return;
+  }
+
+  const requiredFields = [
+    "first_name", "last_name", "address", "city",
+    "state", "zip", "phone", "email"
+  ];
+
+  for (let field of requiredFields) {
+    if (!billing[field]) {
+      alert(`Please fill in ${field.replace("_", " ")}`);
+      return;
+    }
+  }
+
+  const payload = {
+    email: billing.email,
+    billing: { ...billing },
+    cartItems: cartItems.map((item) => ({
+      product_id: item.product_id,
+      name: item.name,
+      quantity: item.quantity,
+      price: item.price,
+      subtotal: item.subtotal,
+    })),
+    total,
+    session_id, // ✅ Only session_id is sent
+  };
+
+  try {
+    const registerResponse = await axios.post(
+      "https://mvsdeals.online/register.php",
+      { email: billing.email }
+    );
+
+    if (!registerResponse.data.success) {
+      const errorMsg = registerResponse.data.error || registerResponse.data.message || "Unknown error";
+      alert("Registration failed: " + errorMsg);
       return;
     }
 
-    const payload = {
-      email: billing.email,
-      billing,
-      cartItems: cartItems.map((item) => ({
-        product_id: item.product_id,
-        name: item.name,
-        quantity: item.quantity,
-        price: item.price,
-        subtotal: item.subtotal,
-      })),
-      total,
-      user_id,
-      session_id,
-    };
-
-    try {
-      // Check if the user exists or register them
-      const registerResponse = await axios.post(
-        "https://mvsdeals.online/register.php", // Your PHP registration endpoint
-        { email: billing.email }
-      );
-
-      if (registerResponse.data.success) {
-        alert(registerResponse.data.message); // Show message from PHP about user registration
-
-        // Proceed with the order after registration
-        const orderResponse = await axios.post(
-          "https://mvsdeals.online/checkout.php", // Your PHP checkout endpoint
-          payload,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (orderResponse.data.success) {
-          alert("Order placed successfully!");
-          setBilling({
-            first_name: "",
-            last_name: "",
-            company: "",
-            country: "India",
-            address: "",
-            apartment: "",
-            city: "",
-            state: "",
-            zip: "",
-            phone: "",
-            email: "",
-            notes: "",
-          });
-
-          // Optionally navigate to home or order confirmation page
-          navigate("/");
-        } else {
-          alert("Order failed: " + orderResponse.data.message);
-        }
-      } else {
-        alert("Registration failed: " + registerResponse.data.error);
+    const paymentResponse = await axios.post(
+      "https://mvsdeals.online/create_payment.php",
+      payload,
+      {
+        headers: { "Content-Type": "application/json" },
       }
-    } catch (error) {
-      alert("Something went wrong during checkout.");
-      console.error(error);
+    );
+
+    if (paymentResponse.data.success && paymentResponse.data.approvalUrl) {
+      window.location.href = paymentResponse.data.approvalUrl;
+    } else {
+      alert("Payment initiation failed.");
     }
-  };
+  } catch (error) {
+    console.error("Checkout error", error);
+    if (error.response) {
+      console.error("Server said:", error.response.data);
+      alert("Error: " + (error.response.data.error || error.response.data.message || "Unknown"));
+    } else if (error.request) {
+      alert("No response from server.");
+    } else {
+      alert("Client error: " + error.message);
+    }
+  }
+};
 
   return (
     <div className={styles.checkoutContainer}>
@@ -270,8 +264,7 @@ const Checkout = () => {
               <p className={styles.testModeNote}>
                 TEST MODE ENABLED
                 <br />
-                Use card number <strong>4111111111111111</strong> with any CVC
-                and valid date.
+                Use card number <strong>4111111111111111</strong> with any CVC and valid date.
               </p>
               <div className={styles.field}>
                 <label>Card number</label>
@@ -288,14 +281,13 @@ const Checkout = () => {
                 </div>
               </div>
               <p className={styles.privacyNote}>
-                Your personal data will be used to process your order and
-                enhance your experience.
+                Your personal data will be used to process your order and enhance your experience.
               </p>
               <button
                 className={styles.placeOrderBtn}
                 onClick={handlePlaceOrder}
               >
-                Place Order
+                Pay with PayPal
               </button>
             </div>
           </div>
