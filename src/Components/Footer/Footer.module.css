@@ -1,70 +1,73 @@
 .footer {
-  background-color: #2c3e50;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
   color: #ecf0f1;
-  padding: 40px 0 20px;
-  font-family: 'Arial', sans-serif;
+  padding: 50px 20px 30px;
+  font-family: 'Segoe UI', sans-serif;
   width: 100%;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .container {
-  /* max-width: 00px; */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 .footerContent {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 40px;
-  margin-bottom: 30px;
 }
 
 .brandSection {
-  max-width: 400px;
+  flex: 1 1 300px;
 }
 
 .brandTitle {
   font-size: 2rem;
-  margin-bottom: 20px;
   color: #fff;
+  margin-bottom: 15px;
 }
 
 .brandText {
+  font-size: 1rem;
   line-height: 1.6;
   color: #bdc3c7;
   margin-bottom: 20px;
 }
 
 .brandLogo {
-  max-width: 350px;
+  width: 250px;
   height: auto;
+  margin-top: 10px;
 }
 
 .linksSection {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  flex: 2 1 600px;
+  display: flex;
+  flex-wrap: wrap;
   gap: 30px;
 }
 
 .linksColumn {
-  margin-bottom: 20px;
+  flex: 1 1 200px;
 }
 
 .linksTitle {
-  font-size: 1.6rem;
-  margin-bottom: 20px;
+  font-size: 1.3rem;
   color: #fff;
+  margin-bottom: 15px;
   position: relative;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 
 .linksTitle::after {
   content: '';
   position: absolute;
-  left: 0;
   bottom: 0;
+  left: 0;
+  height: 3px;
   width: 50px;
-  height: 2px;
   background-color: #3498db;
 }
 
@@ -77,20 +80,19 @@
 .linksList li {
   margin-bottom: 12px;
   color: #bdc3c7;
-  line-height: 1.5;
+  font-size: 0.95rem;
   display: flex;
-  align-items: center;
-  font-size: 18px;
+  align-items: flex-start;
 }
 
 .linksList a {
   color: #bdc3c7;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
 .linksList a:hover {
-  color: #3498db;
+  color: #00aced;
 }
 
 .contactIcon {
@@ -99,10 +101,22 @@
   min-width: 20px;
 }
 
+.contactLink {
+  margin-left: 8px;
+  color: #ff9800;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contactLink:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
 .paymentItem {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #34495e;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #3b4a59;
 }
 
 .paymentLogo {
@@ -110,77 +124,66 @@
   width: auto;
 }
 
-
- .copyrightSection {
-  width: 97%;
-  background-color: black;
+.copyrightSection {
+  margin-top: 40px;
   text-align: center;
-  color: #7f8c8d;
-  font-size: 1rem;
-  line-height: 1.6;
+  background-color: #1a252f;
+  color: #95a5a6;
   padding: 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
   border-top: 1px solid #34495e;
 }
 
-
-/* Responsive Styles */
+/* Responsive Layouts */
 @media (max-width: 992px) {
   .footerContent {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-  
-  .brandSection {
-    max-width: 100%;
-  }
-  
-  .linksSection {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
-@media (max-width: 768px) {
   .linksSection {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .brandTitle {
-    font-size: 1.8rem;
+
+  .linksColumn {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .brandSection {
+    text-align: center;
+  }
+
+  .brandLogo {
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 576px) {
   .footer {
-    padding: 30px 0 15px;
+    padding: 30px 15px;
   }
-  
+
   .brandTitle {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
-  
+
   .linksTitle {
     font-size: 1.1rem;
-    margin-bottom: 15px;
   }
-  
-  .contactIcon {
-    margin-right: 8px;
-    font-size: 0.9rem;
-  }
-  
+
   .paymentLogo {
     height: 25px;
   }
-}
 
-.contactLink {
-  margin-left: 8px;
-  color: #ff9800; 
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
+  .contactIcon {
+    font-size: 0.9rem;
+  }
 
-.contactLink:hover {
-  color: #ffffff;
-  text-decoration: underline;
+  .contactLink {
+    font-size: 0.9rem;
+  }
 }

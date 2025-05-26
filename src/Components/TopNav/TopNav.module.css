@@ -1,103 +1,100 @@
-/* 
-
+*{
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 20px;
-  background-color: #000;
-  color: #fff;
-  font-size: 14px;
-}
-
-.left {
-  display: flex;
-  gap: 20px;
-  font-size:20px;
-}
-
-.left span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.right p {
-  margin: 0;
-  font-weight: bold;
-  color: #ff9900;
-  font-size: 20px;
-  gap: 5px;
-  font-size: 20px;
-}
-.right p svg {
-    margin: 0;
-    font-weight: bold;
-    color: #ff9900;
-    font-size: 20px;
-    margin-top: 10px;
-    align-items: center;
-    margin-right: 10px;
-
-
-  }
-
-  .left a {
-  color: inherit;
-  text-decoration: none;
-  margin-left: 10px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.left a:hover {
-  text-decoration: underline;
-} */
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 30px;
-  background: linear-gradient(to right, #141e30, #243b55); /* dark blue gradient */
+  padding: 1rem 2rem;
+  background: linear-gradient(to right, #141e30, #243b55);
   color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 17px;
+  font-size: 16px;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  transition: all 0.3s ease-in-out;
+  
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .left {
-  display: flex;
-  gap: 25px;
+  flex: 1;
 }
 
 .left a {
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.4rem;
   transition: color 0.3s ease, transform 0.2s ease;
   font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .left a:hover {
-  color: #ff9900; /* gold */
-  transform: translateY(-1px);
+  color: #ff9900;
+  transform: translateY(-2px);
 }
 
 .right p {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   margin: 0;
   color: #ff9900;
-  font-size: 19px;
+  font-size: 1.1rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .arrowIcon {
-  font-size: 18px;
+  font-size: 1rem;
   color: #ff9900;
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .left, .right {
+    justify-content: center;
+  }
+
+  .left a {
+    font-size: 1rem;
+  }
+
+  .right p {
+    font-size: 1rem;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    font-size: 14px;
+    padding: 0.75rem 1rem;
+  }
+
+  .left a {
+    font-size: 0.9rem;
+  }
+
+  .right p {
+    font-size: 0.95rem;
+  }
+}
