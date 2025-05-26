@@ -14,7 +14,7 @@ const Checkout = () => {
   const [billing, setBilling] = useState({
     first_name: "", 
     last_name: "",
-    company: "",       // <-- UPDATED: all fields present
+    company: "",  
     country: "India",
     address: "",
     apartment: "",
