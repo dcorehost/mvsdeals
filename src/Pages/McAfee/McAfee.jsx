@@ -19,9 +19,6 @@ const McAfee = () => {
     <CallUsMcAfee />
     <CommonBanner />
     <Footer />
-    
-
-   
      
     </>
   );
